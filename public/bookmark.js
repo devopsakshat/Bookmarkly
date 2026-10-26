@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:3000/api/v1/bookmarks";
+const API_BASE = "/api/v1/bookmarks";
 
 const form = document.querySelector("#bookmark-form");
 const titleInput = document.querySelector("#title");
@@ -84,7 +84,7 @@ async function request(path = "", options = {}) {
     response = await fetch(`${API_BASE}${path}`, { ...options, headers });
   } catch {
     setConnection("offline", "API unavailable");
-    throw new Error(`Can't reach the API at ${API_BASE}. Start your Express server and check the API URL.`);
+   throw new Error(`Can't reach the API at ${API_BASE}. Check your connection.`);
   }
   let payload = null;
   const contentType = response.headers.get("content-type") || "";
