@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f8fc" />
+    <title>Bookmark Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="bookmark.css" />
+    <script src="bookmark.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#" aria-label="Bookmarkly home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path
+                d="M7 4.75A1.75 1.75 0 0 1 8.75 3h6.5A1.75 1.75 0 0 1 17 4.75V21l-5-3.2L7 21V4.75Z"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linejoin="round"
+              />
+              <path
+                d="m9.2 9.5 1.8 1.8 3.8-4"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+          <span>bookmark<span class="brand-accent">ly</span></span>
+        </a>
+
+        <div class="sidebar-label">WORKSPACE</div>
+        <nav class="nav-list" aria-label="Main navigation">
+          <button class="nav-item active" type="button" data-view="all">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect
+                x="3.5"
+                y="3.5"
+                width="7"
+                height="7"
+                rx="1.8"
+                stroke="currentColor"
+                stroke-width="1.7"
+              />
+              <rect
+                x="13.5"
+                y="3.5"
+                width="7"
+                height="7"
+                rx="1.8"
+                stroke="currentColor"
+                stroke-width="1.7"
+              />
+              <rect
+                x="3.5"
+                y="13.5"
+                width="7"
+                height="7"
+                rx="1.8"
+                stroke="currentColor"
+                stroke-width="1.7"
+              />
+              <rect
+                x="13.5"
+                y="13.5"
+                width="7"
+                height="7"
+                rx="1.8"
+                stroke="currentColor"
+                stroke-width="1.7"
+              />
+            </svg>
+            <span>All bookmarks</span
+            ><span class="nav-count" id="sidebar-count">—</span>
+          </button>
+          <button class="nav-item" type="button" data-view="Development">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path
+                d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span>Development</span>
+          </button>
+          <button class="nav-item" type="button" data-view="Design">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path
+                d="M12 3.5a8.5 8.5 0 1 0 0 17h1.2a2 2 0 0 0 1.5-3.3 1.5 1.5 0 0 1 1.1-2.5h1.1A3.6 3.6 0 0 0 20.5 11 7.5 7.5 0 0 0 12 3.5Z"
+                stroke="currentColor"
+                stroke-width="1.7"
+              />
+              <circle cx="7.8" cy="10" r="1" fill="currentColor" />
+              <circle cx="11" cy="7.2" r="1" fill="currentColor" />
+              <circle cx="15.2" cy="8.3" r="1" fill="currentColor" />
+            </svg>
+            <span>Design</span>
+          </button>
+          <button class="nav-item" type="button" data-view="Learning">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path
+                d="m3 8.5 9-5 9 5-9 5-9-5Z"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M6.5 10.5v5c3.2 2.7 7.8 2.7 11 0v-5M21 9v6"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span>Learning</span>
+          </button>
+          <button class="nav-item" type="button" data-view="Other">
+            <svg viewBox="0 0 24 24" fill="none">
+              <circle cx="5" cy="12" r="1.2" fill="currentColor" />
+              <circle cx="12" cy="12" r="1.2" fill="currentColor" />
+              <circle cx="19" cy="12" r="1.2" fill="currentColor" />
+            </svg>
+            <span>Other</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="sidebar-tip">
+            <div class="tip-icon">✦</div>
+            <p class="tip-title">A little more organized.</p>
+            <p class="tip-copy">
+              Keep your best corners of the internet in one place.
+            </p>
+          </div>
+          <div class="profile">
+            <div class="avatar">A</div>
+            <div class="profile-copy">
+              <strong>Personal workspace</strong><span>Local API project</span>
+            </div>
+            <span class="profile-dot" title="API connection status"></span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="breadcrumbs">
+            <span>Workspace</span><span class="crumb-slash">/</span
+            ><strong>Bookmarks</strong>
+          </div>
+          <div class="topbar-right">
+            <span class="connection-pill" id="connection-status"
+              ><span class="status-dot"></span> Connecting to API…</span
+            >
+            <button
+              class="icon-button"
+              id="refresh-button"
+              type="button"
+              aria-label="Refresh bookmarks"
+              title="Refresh bookmarks"
+            >
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M20 7v5h-5M4 17v-5h5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M5.6 9A7 7 0 0 1 17.4 6L20 12M4 12l2.6 6A7 7 0 0 0 18.4 15"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        </header>
+
+        <section class="page-intro">
+          <div>
+            <div class="eyebrow">
+              <span class="eyebrow-line"></span> YOUR PERSONAL LIBRARY
+            </div>
+            <h1>Save the good stuff<span class="title-period">.</span></h1>
+            <p class="page-subtitle">
+              All the useful links you find, thoughtfully kept in one place.
+            </p>
+          </div>
+          <div class="intro-decoration" aria-hidden="true">
+            <span class="decor-star">✳</span><span class="decor-ring"></span
+            ><span class="decor-dot"></span>
+          </div>
+        </section>
+
+        <section class="stats-row" aria-label="Bookmark overview">
+          <div class="stat-card">
+            <div class="stat-icon stat-icon-purple">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M7 4.75A1.75 1.75 0 0 1 8.75 3h6.5A1.75 1.75 0 0 1 17 4.75V21l-5-3.2L7 21V4.75Z"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <div>
+              <span class="stat-label">Total bookmarks</span
+              ><strong id="total-count">—</strong>
+            </div>
+            <span class="stat-caption">in your library</span>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon-peach">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M4 6.5h16M4 12h16M4 17.5h10"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                />
+                <circle
+                  cx="18"
+                  cy="17.5"
+                  r="2"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                />
+              </svg>
+            </div>
+            <div>
+              <span class="stat-label">Categories</span
+              ><strong id="category-count">—</strong>
+            </div>
+            <span class="stat-caption">ways to organize</span>
+          </div>
+        </section>
+
+        <section class="form-panel" aria-labelledby="form-heading">
+          <div class="panel-heading">
+            <div class="heading-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 5v14M5 12h14"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </div>
+            <div>
+              <h2 id="form-heading">Add a bookmark</h2>
+              <p>Found something worth keeping? Save it here.</p>
+            </div>
+            <span class="form-step">NEW LINK <span>↗</span></span>
+          </div>
+          <form id="bookmark-form" novalidate>
+            <div class="form-grid">
+              <label class="field">
+                <span class="field-label"
+                  >Bookmark title <span class="required">*</span></span
+                >
+                <input
+                  id="title"
+                  name="title"
+                  type="text"
+                  maxlength="100"
+                  placeholder="e.g. A guide to JavaScript"
+                  required
+                  autocomplete="off"
+                />
+                <span class="field-hint">Give your link a memorable name.</span>
+              </label>
+              <label class="field">
+                <span class="field-label"
+                  >Website URL <span class="required">*</span></span
+                >
+                <div class="input-with-icon">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M10 13.5a4.5 4.5 0 0 0 6.4 0l2.2-2.2a4.5 4.5 0 0 0-6.4-6.4l-1.3 1.3M14 10.5a4.5 4.5 0 0 0-6.4 0l-2.2 2.2a4.5 4.5 0 0 0 6.4 6.4l1.3-1.3"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                    /></svg
+                  ><input
+                    id="url"
+                    name="url"
+                    type="url"
+                    placeholder="https://example.com"
+                    required
+                    autocomplete="url"
+                  />
+                </div>
+                <span class="field-hint"
+                  >Use a full http:// or https:// URL.</span
+                >
+              </label>
+              <label class="field category-field">
+                <span class="field-label"
+                  >Category <span class="required">*</span></span
+                >
+                <div class="select-wrap">
+                  <select id="category" name="category" required>
+                    <option value="" disabled selected>
+                      Choose a category
+                    </option>
+                    <option>Development</option>
+                    <option>Design</option>
+                    <option>Learning</option>
+                    <option>Productivity</option>
+                    <option>Inspiration</option>
+                    <option>Other</option></select
+                  ><svg viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="m7 10 5 5 5-5"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+                <span class="field-hint">Keep related links together.</span>
+              </label>
+            </div>
+            <div class="form-footer">
+              <p class="form-note">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 3.5 20 7v5c0 4.4-3.2 7-8 8.5C7.2 19 4 16.4 4 12V7l8-3.5Z"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="m9 12 2 2 4-4"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                Your links are saved to your connected database.
+              </p>
+              <div class="form-actions">
+                <button
+                  class="button button-quiet hidden"
+                  id="cancel-edit"
+                  type="button"
+                >
+                  Cancel</button
+                ><button
+                  class="button button-primary"
+                  id="submit-button"
+                  type="submit"
+                >
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M12 5v14M5 12h14"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    /></svg
+                  ><span>Save bookmark</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </section>
+
+        <section class="library-section" aria-labelledby="library-heading">
+          <div class="library-header">
+            <div>
+              <div class="section-kicker">YOUR COLLECTION</div>
+              <h2 id="library-heading">
+                Your bookmarks
+                <span class="heading-count" id="visible-count">0</span>
+              </h2>
+            </div>
+            <div class="library-tools">
+              <label class="search-box"
+                ><svg viewBox="0 0 24 24" fill="none">
+                  <circle
+                    cx="10.8"
+                    cy="10.8"
+                    r="6.8"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  />
+                  <path
+                    d="m16 16 4.2 4.2"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                  /></svg
+                ><input
+                  id="search-input"
+                  type="search"
+                  placeholder="Search bookmarks…"
+                  aria-label="Search bookmarks"
+              /></label>
+              <label class="filter-select"
+                ><span class="sr-only">Filter by category</span
+                ><select id="filter-category">
+                  <option value="">All categories</option>
+                  <option>Development</option>
+                  <option>Design</option>
+                  <option>Learning</option>
+                  <option>Productivity</option>
+                  <option>Inspiration</option>
+                  <option>Other</option></select
+                ><svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="m7 10 5 5 5-5"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg
+              ></label>
+            </div>
+          </div>
+
+          <div class="results-meta">
+            <span id="results-label">Loading your collection…</span
+            ><span class="sort-label"
+              ><span class="sort-dot"></span> Recently added first</span
+            >
+          </div>
+          <div class="bookmark-grid" id="bookmark-grid" aria-live="polite">
+            <div class="loading-state">
+              <span class="loader"></span>
+              <p>Loading your bookmarks…</p>
+            </div>
+          </div>
+          <div class="footer-note">
+            <span class="footer-sparkle">✳</span> A little less searching, a
+            little more doing.
+          </div>
+        </section>
+        <footer class="page-footer">
+          <span
+            >BOOKMARKLY
+            <span class="footer-year">· PERSONAL LINK LIBRARY</span></span
+          ><span
+            >Made for your curious mind
+            <span class="footer-heart">♥</span></span
+          >
+        </footer>
+      </main>
+    </div>
+
+    <div
+      class="toast-region"
+      id="toast-region"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+
+    <dialog class="confirm-dialog" id="delete-dialog">
+      <form method="dialog" class="dialog-inner">
+        <div class="dialog-icon">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path
+              d="M4 7h16M9 7V4.5h6V7m-9 0 1 13h10l1-13M10 10.5v6m4-6v6"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <h2>Delete this bookmark?</h2>
+        <p>
+          This will permanently remove
+          <strong id="delete-title">this bookmark</strong> from your library.
+        </p>
+        <div class="dialog-actions">
+          <button class="button button-quiet" value="cancel">Keep it</button
+          ><button
+            class="button button-danger"
+            id="confirm-delete"
+            value="confirm"
+          >
+            Delete bookmark
+          </button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>
